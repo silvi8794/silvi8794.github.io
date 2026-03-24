@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Silvia Perez - Backend Developer</title>
+  <title>Silvia Perez | Backend Developer (NestJS, Laravel)</title>
 
   <style>
     body {
@@ -20,7 +20,7 @@
 
     .header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
 
     .header img {
@@ -77,44 +77,73 @@
       margin-top: 10px;
     }
 
+    .lang-switch {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    .lang-switch button {
+      background: transparent;
+      border: 1px solid #f472b6;
+      color: #f472b6;
+      padding: 5px 10px;
+      margin-left: 5px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .lang-switch button:hover {
+      background: #f472b6;
+      color: white;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+      color: #cbd5f5;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
 
+    <div class="lang-switch">
+      <button onclick="setLang('es')">ES</button>
+      <button onclick="setLang('en')">EN</button>
+    </div>
+
     <div class="header">
       <img src="https://github.com/silvi8794.png" alt="Foto de Silvia">
       <h1>Silvia Andrea Perez</h1>
-      <p class="subtitle">Backend Developer (NestJS & Laravel)</p>
+      <p class="subtitle" id="subtitle"></p>
     </div>
 
-    <h2>Sobre mí</h2>
-    <p>
-  Me especializo en el desarrollo de APIs backend utilizando buenas prácticas de arquitectura,
-  con foco en la separación de responsabilidades, escalabilidad y código mantenible.
-</p>
+    <h2 id="about-title"></h2>
+    <p id="about-text"></p>
 
-    <h2>Stack</h2>
-    <p>NestJS · Laravel · TypeScript · Node.js</p>
+    <h2 id="stack-title"></h2>
+    <p id="stack-text"></p>
 
-    <h2>Proyectos</h2>
+    <h2 id="projects-title"></h2>
 
     <div class="card">
       <p><strong>E-commerce API</strong></p>
-       <p>
-    Una API REST desarrollada con NestJS y TypeScript, escalable, diseñada con arquitectura dirigida por eventos (EDA) y comunicación en tiempo real mediante WebSockets. Este proyecto integra pasarelas de pago como Mercado Pago y automatiza la validación administrativa de pagos mediante el uso de Inteligencia Artificial (Google Gemini), extrayendo y verificando datos bancarios de forma autónoma. Incluye gestión completa de catálogos jerárquicos, control de stock por variante y seguridad avanzada con RBAC y JWT, todo bajo un enfoque de código limpio y tests automatizados con Jest.
-       </p>
-      <a href="https://github.com/silvi8794/nestjs-ecommerce-api">Ver repo →</a>
+      <div id="project1-text"></div>
+      <a href="https://github.com/silvi8794/nestjs-ecommerce-api" target="_blank" id="repo-link"></a>
     </div>
 
     <div class="card">
       <p><strong>Laravel API Training</strong></p>
-      <p>API en Laravel con autenticación, arquitectura mantenible y tests.</p>
-      <a href="https://github.com/silvi8794/api-trainning">Ver repo →</a>
+      <div id="project2-text"></div>
+      <a href="https://github.com/silvi8794/api-trainning" target="_blank" id="repo2-link"></a>
     </div>
 
-    <h2>Contacto</h2>
+    <h2 id="contact-title"></h2>
 
     <div class="contact">
       <a href="https://github.com/silvi8794" target="_blank">🐙 GitHub</a>
@@ -122,5 +151,98 @@
     </div>
 
   </div>
+
+  <script>
+    const content = {
+      es: {
+        subtitle: "Backend Developer (NestJS & Laravel)",
+        aboutTitle: "Sobre mí",
+        aboutText: "Desarrollo APIs backend robustas y escalables utilizando NestJS y Laravel, aplicando principios de Clean Architecture, separación de responsabilidades y buenas prácticas para construir sistemas mantenibles y de alto rendimiento.",
+        stackTitle: "Stack",
+        stackText: "NestJS · Laravel · TypeScript · Node.js · PostgreSQL · WebSockets · JWT · RBAC",
+        projectsTitle: "Proyectos",
+        project1Text: `
+          <p>API REST desarrollada con NestJS y TypeScript, diseñada para ser escalable y mantenible.</p>
+          <ul>
+            <li>Arquitectura dirigida por eventos (EDA)</li>
+            <li>Comunicación en tiempo real con WebSockets</li>
+            <li>Integración con Mercado Pago</li>
+            <li>Validación automatizada de pagos usando IA (Google Gemini)</li>
+            <li>Optimización de performance mediante estrategias de caching</li>
+          </ul>
+          <p>Además, incluye:</p>
+          <ul>
+            <li>Gestión de catálogos jerárquicos</li>
+            <li>Control de stock por variantes</li>
+            <li>Seguridad con JWT y RBAC</li>
+            <li>Tests automatizados con Jest</li>
+          </ul>
+        `,
+        project2Text: `
+          <p>API desarrollada en Laravel enfocada en buenas prácticas y arquitectura mantenible.</p>
+          <ul>
+            <li>Autenticación y manejo de usuarios</li>
+            <li>Estructura organizada y escalable</li>
+            <li>Implementación de tests automatizados</li>
+          </ul>
+        `,
+        contactTitle: "Contacto",
+        repo: "Ver repo →"
+      },
+      en: {
+        subtitle: "Backend Developer (NestJS & Laravel)",
+        aboutTitle: "About me",
+        aboutText: "I build robust and scalable backend APIs using NestJS and Laravel, applying Clean Architecture principles, separation of concerns, and best practices to create maintainable and high-performance systems.",
+        stackTitle: "Stack",
+        stackText: "NestJS · Laravel · TypeScript · Node.js · PostgreSQL · WebSockets · JWT · RBAC",
+        projectsTitle: "Projects",
+        project1Text: `
+          <p>Scalable REST API built with NestJS and TypeScript, designed for maintainability and performance.</p>
+          <ul>
+            <li>Event-driven architecture (EDA)</li>
+            <li>Real-time communication with WebSockets</li>
+            <li>Mercado Pago integration</li>
+            <li>Automated payment validation using AI (Google Gemini)</li>
+            <li>Performance optimization using caching strategies</li>
+          </ul>
+          <p>Also includes:</p>
+          <ul>
+            <li>Hierarchical catalog management</li>
+            <li>Stock control by variants</li>
+            <li>Security with JWT and RBAC</li>
+            <li>Automated testing with Jest</li>
+          </ul>
+        `,
+        project2Text: `
+          <p>Laravel API focused on clean architecture and best practices.</p>
+          <ul>
+            <li>Authentication and user management</li>
+            <li>Scalable and well-structured codebase</li>
+            <li>Automated testing implementation</li>
+          </ul>
+        `,
+        contactTitle: "Contact",
+        repo: "View repo →"
+      }
+    };
+
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.getElementById("subtitle").innerText = content[lang].subtitle;
+      document.getElementById("about-title").innerText = content[lang].aboutTitle;
+      document.getElementById("about-text").innerText = content[lang].aboutText;
+      document.getElementById("stack-title").innerText = content[lang].stackTitle;
+      document.getElementById("stack-text").innerText = content[lang].stackText;
+      document.getElementById("projects-title").innerText = content[lang].projectsTitle;
+      document.getElementById("project1-text").innerHTML = content[lang].project1Text;
+      document.getElementById("project2-text").innerHTML = content[lang].project2Text;
+      document.getElementById("contact-title").innerText = content[lang].contactTitle;
+      document.getElementById("repo-link").innerText = content[lang].repo;
+      document.getElementById("repo2-link").innerText = content[lang].repo;
+    }
+
+    setLang('es');
+  </script>
+
 </body>
 </html>
