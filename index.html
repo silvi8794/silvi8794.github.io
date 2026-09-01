@@ -2,476 +2,508 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Silvia Perez | Backend Developer (NestJS, Laravel)</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Silvia Perez | Backend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --rose: #f472b6;
+      --rose-light: #fbcfe8;
+      --rose-dark: #ec4899;
+      --rose-glow: rgba(244, 114, 182, 0.25);
+      --bg-dark: #0c0a1a;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --bg-card-hover: rgba(255, 255, 255, 0.06);
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: rgba(244, 114, 182, 0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      background: linear-gradient(135deg, #1e1b2e, #0f172a);
-      color: #e2e8f0;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 50px 30px;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .header img {
-      width: 120px;
-      border-radius: 50%;
-      border: 3px solid #f472b6;
-      margin-bottom: 15px;
-    }
-
-    h1 {
-      font-size: 38px;
-      margin: 10px 0;
-    }
-
-    .subtitle {
-      color: #f472b6;
-      font-weight: 500;
-    }
-
-    h2 {
-      margin-top: 40px;
-      color: #f472b6;
-      font-size: 22px;
-    }
-
-    p {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
       line-height: 1.7;
-      color: #cbd5f5;
+      overflow-x: hidden;
     }
 
-    .card {
-      background: rgba(30, 41, 59, 0.7);
-      padding: 20px;
-      border-radius: 14px;
-      margin-top: 15px;
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(244, 114, 182, 0.2);
-      transition: transform 0.2s ease;
+    /* --- NAV --- */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(12, 10, 26, 0.8);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-name {
+      font-weight: 700; font-size: 18px; color: var(--rose);
+      letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a, .nav-links button {
+      background: none; border: none; cursor: pointer;
+      font-family: inherit; font-size: 14px; font-weight: 500;
+      color: var(--text-secondary); text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover, .nav-links button:hover { color: var(--rose); }
+    .lang-btns { display: flex; gap: 6px; }
+    .lang-btns button {
+      padding: 4px 12px; border-radius: 6px;
+      border: 1px solid var(--border) !important;
+      font-size: 12px !important; font-weight: 600 !important;
+    }
+    .lang-btns button.active {
+      background: var(--rose) !important; color: #fff !important;
+      border-color: var(--rose) !important;
     }
 
-    .card:hover {
-      transform: translateY(-3px);
+    /* --- HERO --- */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      justify-content: center; text-align: center;
+      padding: 120px 30px 80px;
+      position: relative;
     }
-
-    a {
-      color: #f9a8d4;
-      text-decoration: none;
-      font-weight: 500;
+    .hero::before {
+      content: ''; position: absolute; top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(244,114,182,0.12) 0%, transparent 70%);
+      pointer-events: none;
     }
-
-    .contact {
-      display: flex;
-      gap: 20px;
-      margin-top: 10px;
+    .hero-content { position: relative; max-width: 700px; }
+    .hero-img {
+      width: 130px; height: 130px; border-radius: 50%;
+      border: 3px solid var(--rose);
+      box-shadow: 0 0 40px var(--rose-glow);
+      margin-bottom: 28px;
+      object-fit: cover;
     }
-
-    .lang-switch {
-      text-align: right;
+    .hero h1 {
+      font-size: 48px; font-weight: 700;
+      letter-spacing: -1.5px; margin-bottom: 12px;
+      background: linear-gradient(135deg, #fff 30%, var(--rose));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-role {
+      font-size: 18px; color: var(--rose); font-weight: 500;
       margin-bottom: 20px;
     }
+    .hero-desc {
+      font-size: 16px; color: var(--text-secondary);
+      max-width: 560px; margin: 0 auto 36px;
+    }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; border-radius: 10px; font-size: 14px;
+      font-weight: 600; text-decoration: none; transition: all 0.3s;
+      border: none; cursor: pointer; font-family: inherit;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--rose-dark), var(--rose));
+      color: #fff; box-shadow: 0 4px 24px var(--rose-glow);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px var(--rose-glow); }
+    .btn-outline {
+      background: transparent; color: var(--text-primary);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .btn-outline:hover { border-color: var(--rose); color: var(--rose); }
 
-    .lang-switch button {
-      background: transparent;
-      border: 1px solid #f472b6;
-      color: #f472b6;
-      padding: 5px 10px;
-      margin-left: 5px;
-      border-radius: 6px;
-      cursor: pointer;
+    /* --- SECTIONS --- */
+    section { padding: 80px 30px; max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 3px; color: var(--rose); margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 32px; font-weight: 700; letter-spacing: -1px;
+      margin-bottom: 40px;
     }
 
-    .lang-switch button:hover {
-      background: #f472b6;
-      color: white;
+    /* --- STACK --- */
+    .stack-grid {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .stack-tag {
+      padding: 8px 18px; border-radius: 8px; font-size: 13px;
+      font-weight: 600; background: var(--bg-card);
+      border: 1px solid var(--border); color: var(--text-secondary);
+      transition: all 0.25s;
+    }
+    .stack-tag:hover {
+      border-color: var(--rose); color: var(--rose);
+      background: rgba(244,114,182,0.08);
     }
 
-    ul {
-      padding-left: 20px;
-      margin-top: 10px;
-      color: #cbd5f5;
+    /* --- PROJECTS --- */
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 32px;
+      margin-bottom: 24px;
+      transition: all 0.3s;
+      position: relative; overflow: hidden;
+    }
+    .project-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--rose), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .project-card:hover {
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .project-card:hover::before { opacity: 1; }
+    .project-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 16px; margin-bottom: 16px;
+    }
+    .project-name {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.5px;
+    }
+    .project-desc {
+      color: var(--text-secondary); font-size: 15px; margin-bottom: 18px;
+    }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+    .project-tag {
+      font-size: 11px; font-weight: 600; padding: 4px 12px;
+      border-radius: 6px; background: rgba(244,114,182,0.1);
+      color: var(--rose-light); border: 1px solid rgba(244,114,182,0.15);
+    }
+    .project-features {
+      list-style: none; padding: 0; margin-bottom: 20px;
+    }
+    .project-features li {
+      position: relative; padding-left: 20px;
+      margin-bottom: 8px; color: var(--text-secondary);
+      font-size: 14px;
+    }
+    .project-features li::before {
+      content: ''; position: absolute; left: 0; top: 9px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--rose);
+    }
+    .repo-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 600; color: var(--rose);
+      text-decoration: none; transition: gap 0.25s;
+    }
+    .repo-link:hover { gap: 10px; }
+
+    /* --- CONTACT --- */
+    .contact-section { text-align: center; }
+    .contact-links {
+      display: flex; gap: 16px; justify-content: center;
+      flex-wrap: wrap; margin-top: 10px;
+    }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 10px; font-size: 14px;
+      font-weight: 500; color: var(--text-secondary); text-decoration: none;
+      border: 1px solid var(--border); background: var(--bg-card);
+      transition: all 0.25s;
+    }
+    .contact-link:hover {
+      border-color: var(--rose); color: var(--rose);
+      background: rgba(244,114,182,0.06);
     }
 
-    li {
-      margin-bottom: 6px;
-      line-height: 1.5;
+    /* --- FOOTER --- */
+    footer {
+      text-align: center; padding: 40px 30px; font-size: 13px;
+      color: var(--text-secondary); border-top: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    /* --- ANIMATIONS --- */
+    .fade-in {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 14px; }
+      .hero h1 { font-size: 32px; }
+      .hero { padding: 100px 20px 60px; }
+      section { padding: 60px 20px; }
+      .project-card { padding: 24px; }
+      .contact-links { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
 
-    <div class="lang-switch">
-      <button onclick="setLang('es')">ES</button>
-      <button onclick="setLang('en')">EN</button>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-name">SP</div>
+    <div class="nav-links">
+      <a href="#stack" id="nav-stack"></a>
+      <a href="#projects" id="nav-projects"></a>
+      <a href="#contact" id="nav-contact"></a>
+      <div class="lang-btns">
+        <button onclick="setLang('es')" id="btn-es">ES</button>
+        <button onclick="setLang('en')" id="btn-en">EN</button>
+      </div>
     </div>
+  </nav>
 
-    <div class="header">
-      <img src="https://github.com/silvi8794.png" alt="Foto de Silvia">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <img src="https://github.com/silvi8794.png" alt="Silvia Perez" class="hero-img" />
       <h1>Silvia Andrea Perez</h1>
-      <p class="subtitle" id="subtitle"></p>
+      <p class="hero-role" id="hero-role"></p>
+      <p class="hero-desc" id="hero-desc"></p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary" id="btn-projects"></a>
+        <a href="https://github.com/silvi8794" target="_blank" class="btn btn-outline">GitHub ↗</a>
+      </div>
     </div>
-
-    <h2 id="about-title"></h2>
-    <p id="about-text"></p>
-
-    <h2 id="stack-title"></h2>
-    <p id="stack-text"></p>
-
-    <h2 id="projects-title"></h2>
-
-    <!-- FinCore -->
-    <div class="card">
-      <p><strong>FinCore — Core Bancario y Plataforma Financiera</strong></p>
-      <div id="project0-text"></div>
-      <a
-        href="https://github.com/silvi8794/fincore"
-        target="_blank"
-        id="repo0-link">
-      </a>
-    </div>
-
-    <!-- E-commerce API -->
-    <div class="card">
-      <p><strong>E-commerce API</strong></p>
-      <div id="project1-text"></div>
-      <a
-        href="https://github.com/silvi8794/nestjs-ecommerce-api"
-        target="_blank"
-        id="repo-link">
-      </a>
-    </div>
-
-    <!-- Sistema de Gestión -->
-    <div class="card">
-      <p><strong>Sistema de Gestión de Asistencias (API REST)</strong></p>
-      <div id="project2-text"></div>
-      <a
-        href="https://github.com/silvi8794/api-trainning"
-        target="_blank"
-        id="repo2-link">
-      </a>
-    </div>
-
-    <h2 id="contact-title"></h2>
-
-    <div class="contact">
-      <a href="mailto:silvi8794@gmail.com" id="email-link">
-        📧 silvi8794@gmail.com
-      </a>
-
-      <a href="https://github.com/silvi8794" target="_blank">
-        🐙 GitHub
-      </a>
-
-      <a
-        href="https://www.linkedin.com/in/silvia-andrea-perez-b2a13120b/"
-        target="_blank">
-        💼 LinkedIn
-      </a>
-    </div>
-
   </div>
+
+  <!-- STACK -->
+  <section id="stack">
+    <p class="section-label fade-in" id="stack-label"></p>
+    <h2 class="section-title fade-in" id="stack-title"></h2>
+    <div class="stack-grid fade-in" id="stack-grid"></div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label fade-in" id="proj-label"></p>
+    <h2 class="section-title fade-in" id="proj-title"></h2>
+    <div id="project-list"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <p class="section-label fade-in" id="contact-label"></p>
+    <h2 class="section-title fade-in" id="contact-title"></h2>
+    <div class="contact-links fade-in">
+      <a href="mailto:silvi8794@gmail.com" class="contact-link">📧 silvi8794@gmail.com</a>
+      <a href="https://github.com/silvi8794" target="_blank" class="contact-link">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/silvia-andrea-perez-b2a13120b/" target="_blank" class="contact-link">LinkedIn ↗</a>
+    </div>
+  </section>
+
+  <footer id="footer-text"></footer>
 
   <script>
     const content = {
       es: {
-        subtitle: "Backend Developer (NestJS & Laravel)",
-
-        aboutTitle: "Sobre mí",
-
-        aboutText:
-          "Desarrollo APIs backend robustas y escalables utilizando NestJS y Laravel, aplicando principios de Clean Architecture, separación de responsabilidades y buenas prácticas para construir sistemas mantenibles y de alto rendimiento.",
-
-        stackTitle: "Stack",
-
-        stackText:
-          "NestJS · Laravel · TypeScript · Node.js · PostgreSQL · MySQL · MongoDB · Redis · Docker · Kubernetes · Prometheus · Grafana · DDD · Clean Architecture · CQRS",
-
-        projectsTitle: "Proyectos",
-
-        project0Text: `
-          <p>
-            Core bancario modular y escalable, diseñado bajo principios de
-            Domain-Driven Design (DDD) y Clean Architecture.
-          </p>
-
-          <ul>
-            <li>
-              Arquitectura de microservicios organizada en Bounded Contexts
-              independientes: autenticación, cuentas, pagos e inversiones.
-            </li>
-
-            <li>
-              API Gateway centralizado para la comunicación y orquestación
-              de los servicios.
-            </li>
-
-            <li>
-              Utiliza tilizando PostgreSQL, MongoDB y Redis.
-            </li>
-
-            <li>
-              Implementación de DDD con Aggregate Roots y Value Objects
-              inmutables.
-            </li>
-
-            <li>
-              CQRS aplicado al módulo de inversiones para separar las
-              operaciones de lectura y escritura.
-            </li>
-
-            <li>
-              Auditoría y trazabilidad de eventos mediante MongoDB.
-            </li>
-
-            <li>
-              Observabilidad y monitoreo en tiempo real con Prometheus y Grafana.
-            </li>
-
-            <li>
-              Infraestructura contenerizada con Docker y manifiestos preparados
-              para Kubernetes.
-            </li>
-          </ul>
-        `,
-
-        project1Text: `
-          <p>
-            API REST desarrollada con NestJS y TypeScript, diseñada para ser
-            escalable y mantenible.
-          </p>
-
-          <ul>
-            <li>Arquitectura dirigida por eventos (EDA)</li>
-            <li>Comunicación en tiempo real con WebSockets</li>
-            <li>Integración con Mercado Pago</li>
-            <li>Validación automatizada de pagos usando IA (Google Gemini)</li>
-            <li>Optimización de performance mediante estrategias de caching</li>
-          </ul>
-
-          <p>Además, incluye:</p>
-
-          <ul>
-            <li>Gestión de catálogos jerárquicos</li>
-            <li>Control de stock por variantes</li>
-            <li>Seguridad con JWT y RBAC</li>
-            <li>Tests automatizados con Jest</li>
-          </ul>
-        `,
-
-        project2Text: `
-          <p>
-            Desarrollo de una API robusta y testeable, construida para
-            soportar reglas de negocio complejas.
-          </p>
-
-          <ul>
-            <li>
-              <strong>Arquitectura Limpia:</strong>
-              Separación de la capa de acceso a datos (Eloquent) de la lógica
-              de negocio mediante interfaces, garantizando el principio de
-              Inversión de Dependencia (SOLID).
-            </li>
-
-            <li>
-              <strong>Alto Rendimiento:</strong>
-              Implementación del patrón Decorator para añadir una capa de
-              caché transparente que reduce los accesos a base de datos.
-            </li>
-
-            <li>
-              <strong>Testing y Calidad:</strong>
-              Cobertura de código con pruebas unitarias aisladas (TDD),
-              garantizando fiabilidad y previniendo regresiones.
-            </li>
-          </ul>
-        `,
-
+        navStack: "Stack",
+        navProjects: "Proyectos",
+        navContact: "Contacto",
+        heroRole: "Backend Developer — NestJS & Laravel",
+        heroDesc: "Construyo APIs robustas, escalables y mantenibles aplicando Clean Architecture, DDD y buenas prácticas para sistemas de alto rendimiento.",
+        btnProjects: "Ver proyectos",
+        stackLabel: "Tecnologías",
+        stackTitle: "Mi Stack",
+        stackTags: [
+          "NestJS", "Laravel", "TypeScript", "Node.js",
+          "PostgreSQL", "MySQL", "MongoDB", "Redis",
+          "Docker", "Kubernetes", "Prometheus", "Grafana",
+          "DDD", "Clean Architecture", "CQRS"
+        ],
+        projLabel: "Proyectos",
+        projTitle: "Trabajo destacado",
+        projects: [
+          {
+            name: "FinCore",
+            desc: "Core bancario modular y escalable diseñado bajo Domain-Driven Design y Clean Architecture.",
+            tags: ["NestJS", "PostgreSQL", "MongoDB", "Redis", "Docker", "Kubernetes", "DDD", "CQRS"],
+            features: [
+              "Arquitectura de microservicios en Bounded Contexts independientes: auth, cuentas, pagos e inversiones.",
+              "API Gateway centralizado para orquestación de servicios.",
+              "DDD con Aggregate Roots y Value Objects inmutables.",
+              "CQRS en el módulo de inversiones para separar lectura y escritura.",
+              "Auditoría y trazabilidad de eventos con MongoDB.",
+              "Monitoreo en tiempo real con Prometheus y Grafana.",
+              "Infraestructura contenerizada con Docker y manifiestos para Kubernetes."
+            ],
+            repo: "https://github.com/silvi8794/fincore"
+          },
+          {
+            name: "E-commerce API",
+            desc: "API REST escalable con arquitectura orientada a eventos y comunicación en tiempo real.",
+            tags: ["NestJS", "TypeScript", "WebSockets", "Mercado Pago", "IA", "Redis", "JWT"],
+            features: [
+              "Arquitectura dirigida por eventos (EDA).",
+              "Comunicación en tiempo real con WebSockets.",
+              "Integración con Mercado Pago.",
+              "Validación automatizada de pagos con IA (Google Gemini).",
+              "Caching para optimización de rendimiento.",
+              "Gestión de catálogos jerárquicos y stock por variantes.",
+              "Seguridad con JWT y RBAC. Tests con Jest."
+            ],
+            repo: "https://github.com/silvi8794/nestjs-ecommerce-api"
+          },
+          {
+            name: "Sistema de Gestión de Asistencias",
+            desc: "API REST con arquitectura limpia, patrón Decorator y cobertura de tests.",
+            tags: ["Laravel", "PHP", "Eloquent", "TDD", "SOLID"],
+            features: [
+              "Separación de capas mediante interfaces (Inversión de Dependencia — SOLID).",
+              "Patrón Decorator para caché transparente que reduce accesos a BD.",
+              "Tests unitarios aislados con TDD para fiabilidad y prevención de regresiones."
+            ],
+            repo: "https://github.com/silvi8794/api-trainning"
+          }
+        ],
+        contactLabel: "Hablemos",
         contactTitle: "Contacto",
-
-        repo: "Ver repo →"
+        footer: "© 2026 Silvia Perez — Backend Developer"
       },
-
       en: {
-        subtitle: "Backend Developer (NestJS & Laravel)",
-
-        aboutTitle: "About me",
-
-        aboutText:
-          "I build robust and scalable backend APIs using NestJS and Laravel, applying Clean Architecture principles, separation of concerns, and best practices to create maintainable and high-performance systems.",
-
-        stackTitle: "Stack",
-
-        stackText:
-          "NestJS · Laravel · TypeScript · Node.js · PostgreSQL · MySQL · MongoDB · Redis · Docker · Kubernetes · Prometheus · Grafana · DDD · Clean Architecture · CQRS",
-
-        projectsTitle: "Projects",
-
-        project0Text: `
-          <p>
-            Modular and scalable banking core designed following
-            Domain-Driven Design (DDD) and Clean Architecture principles.
-          </p>
-
-          <ul>
-            <li>
-              Microservices architecture organized into independent
-              Bounded Contexts: authentication, accounts, payments,
-              and investments.
-            </li>
-
-            <li>
-              Centralized API Gateway for service communication
-              and orchestration.
-            </li>
-
-            <li>
-              Using PostgreSQL, MongoDB, and Redis.
-            </li>
-
-            <li>
-              DDD implementation with Aggregate Roots and immutable
-              Value Objects.
-            </li>
-
-            <li>
-              CQRS applied to the investment module to separate
-              read and write operations.
-            </li>
-
-            <li>
-              Event auditing and traceability using MongoDB.
-            </li>
-
-            <li>
-              Real-time observability and monitoring with Prometheus
-              and Grafana.
-            </li>
-
-            <li>
-              Containerized infrastructure using Docker with
-              Kubernetes-ready manifests.
-            </li>
-          </ul>
-        `,
-
-        project1Text: `
-          <p>
-            Scalable REST API built with NestJS and TypeScript,
-            designed for maintainability and performance.
-          </p>
-
-          <ul>
-            <li>Event-driven architecture (EDA)</li>
-            <li>Real-time communication with WebSockets</li>
-            <li>Mercado Pago integration</li>
-            <li>Automated payment validation using AI (Google Gemini)</li>
-            <li>Performance optimization using caching strategies</li>
-          </ul>
-
-          <p>Also includes:</p>
-
-          <ul>
-            <li>Hierarchical catalog management</li>
-            <li>Stock control by variants</li>
-            <li>Security with JWT and RBAC</li>
-            <li>Automated testing with Jest</li>
-          </ul>
-        `,
-
-        project2Text: `
-          <p>
-            Development of a robust and testable API designed to
-            support complex business rules.
-          </p>
-
-          <ul>
-            <li>
-              <strong>Clean Architecture:</strong>
-              Separation between the data access layer (Eloquent)
-              and business logic through interfaces, ensuring
-              compliance with the Dependency Inversion Principle (SOLID).
-            </li>
-
-            <li>
-              <strong>High Performance:</strong>
-              Implementation of the Decorator pattern to provide
-              a transparent caching layer, reducing database access
-              and improving response times.
-            </li>
-
-            <li>
-              <strong>Testing & Quality:</strong>
-              Code coverage with isolated unit tests (TDD), ensuring
-              reliability and preventing regressions.
-            </li>
-          </ul>
-        `,
-
+        navStack: "Stack",
+        navProjects: "Projects",
+        navContact: "Contact",
+        heroRole: "Backend Developer — NestJS & Laravel",
+        heroDesc: "I build robust, scalable and maintainable APIs applying Clean Architecture, DDD and best practices for high-performance systems.",
+        btnProjects: "View projects",
+        stackLabel: "Technologies",
+        stackTitle: "My Stack",
+        stackTags: [
+          "NestJS", "Laravel", "TypeScript", "Node.js",
+          "PostgreSQL", "MySQL", "MongoDB", "Redis",
+          "Docker", "Kubernetes", "Prometheus", "Grafana",
+          "DDD", "Clean Architecture", "CQRS"
+        ],
+        projLabel: "Projects",
+        projTitle: "Featured Work",
+        projects: [
+          {
+            name: "FinCore",
+            desc: "Modular and scalable banking core designed following Domain-Driven Design and Clean Architecture.",
+            tags: ["NestJS", "PostgreSQL", "MongoDB", "Redis", "Docker", "Kubernetes", "DDD", "CQRS"],
+            features: [
+              "Microservices architecture in independent Bounded Contexts: auth, accounts, payments, investments.",
+              "Centralized API Gateway for service orchestration.",
+              "DDD with Aggregate Roots and immutable Value Objects.",
+              "CQRS in the investment module separating reads and writes.",
+              "Event auditing and traceability with MongoDB.",
+              "Real-time monitoring with Prometheus and Grafana.",
+              "Containerized infrastructure with Docker and Kubernetes manifests."
+            ],
+            repo: "https://github.com/silvi8794/fincore"
+          },
+          {
+            name: "E-commerce API",
+            desc: "Scalable REST API with event-driven architecture and real-time communication.",
+            tags: ["NestJS", "TypeScript", "WebSockets", "Mercado Pago", "AI", "Redis", "JWT"],
+            features: [
+              "Event-driven architecture (EDA).",
+              "Real-time communication with WebSockets.",
+              "Mercado Pago integration.",
+              "Automated payment validation with AI (Google Gemini).",
+              "Caching strategies for performance optimization.",
+              "Hierarchical catalogs and variant stock control.",
+              "Security with JWT and RBAC. Testing with Jest."
+            ],
+            repo: "https://github.com/silvi8794/nestjs-ecommerce-api"
+          },
+          {
+            name: "Attendance Management System",
+            desc: "REST API with clean architecture, Decorator pattern, and test coverage.",
+            tags: ["Laravel", "PHP", "Eloquent", "TDD", "SOLID"],
+            features: [
+              "Layer separation via interfaces (Dependency Inversion — SOLID).",
+              "Decorator pattern for transparent caching reducing DB access.",
+              "Isolated unit tests with TDD for reliability and regression prevention."
+            ],
+            repo: "https://github.com/silvi8794/api-trainning"
+          }
+        ],
+        contactLabel: "Get in touch",
         contactTitle: "Contact",
-
-        repo: "View repo →"
+        footer: "© 2026 Silvia Perez — Backend Developer"
       }
+    };
+
+    const stackColors = {
+      NestJS: "#e0234e", Laravel: "#ff2d20", TypeScript: "#3178c6",
+      "Node.js": "#339933", PostgreSQL: "#4169e1", MySQL: "#4479a1",
+      MongoDB: "#47a248", Redis: "#dc382d", Docker: "#2496ed",
+      Kubernetes: "#326ce5", Prometheus: "#e6522c", Grafana: "#f46800",
+      DDD: "#a78bfa", "Clean Architecture": "#a78bfa", CQRS: "#a78bfa"
     };
 
     function setLang(lang) {
       document.documentElement.lang = lang;
+      const c = content[lang];
 
-      document.getElementById("subtitle").innerText =
-        content[lang].subtitle;
+      document.getElementById("nav-stack").textContent = c.navStack;
+      document.getElementById("nav-projects").textContent = c.navProjects;
+      document.getElementById("nav-contact").textContent = c.navContact;
+      document.getElementById("hero-role").textContent = c.heroRole;
+      document.getElementById("hero-desc").textContent = c.heroDesc;
+      document.getElementById("btn-projects").textContent = c.btnProjects;
+      document.getElementById("stack-label").textContent = c.stackLabel;
+      document.getElementById("stack-title").textContent = c.stackTitle;
+      document.getElementById("proj-label").textContent = c.projLabel;
+      document.getElementById("proj-title").textContent = c.projTitle;
+      document.getElementById("contact-label").textContent = c.contactLabel;
+      document.getElementById("contact-title").textContent = c.contactTitle;
+      document.getElementById("footer-text").textContent = c.footer;
 
-      document.getElementById("about-title").innerText =
-        content[lang].aboutTitle;
+      document.getElementById("btn-es").classList.toggle("active", lang === "es");
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
 
-      document.getElementById("about-text").innerText =
-        content[lang].aboutText;
+      // Stack tags
+      const grid = document.getElementById("stack-grid");
+      grid.innerHTML = c.stackTags.map(t =>
+        `<span class="stack-tag" style="border-color:${stackColors[t] ? stackColors[t]+'44' : 'var(--border)'}; color:${stackColors[t] || 'var(--text-secondary)'}">${t}</span>`
+      ).join("");
 
-      document.getElementById("stack-title").innerText =
-        content[lang].stackTitle;
+      // Projects
+      const plist = document.getElementById("project-list");
+      plist.innerHTML = c.projects.map(p => `
+        <div class="project-card fade-in">
+          <div class="project-header">
+            <span class="project-name">${p.name}</span>
+          </div>
+          <p class="project-desc">${p.desc}</p>
+          <div class="project-tags">${p.tags.map(t =>
+            `<span class="project-tag" style="background:${stackColors[t] ? stackColors[t]+'18' : 'rgba(244,114,182,0.1)'}; color:${stackColors[t] || '#fbcfe8'}; border-color:${stackColors[t] ? stackColors[t]+'33' : 'rgba(244,114,182,0.15)'}">${t}</span>`
+          ).join("")}</div>
+          <ul class="project-features">${p.features.map(f =>
+            `<li>${f}</li>`
+          ).join("")}</ul>
+          <a href="${p.repo}" target="_blank" class="repo-link">${lang === 'es' ? 'Ver repositorio' : 'View repository'} →</a>
+        </div>
+      `).join("");
 
-      document.getElementById("stack-text").innerText =
-        content[lang].stackText;
+      observeFadeIns();
+    }
 
-      document.getElementById("projects-title").innerText =
-        content[lang].projectsTitle;
-
-      document.getElementById("project0-text").innerHTML =
-        content[lang].project0Text;
-
-      document.getElementById("project1-text").innerHTML =
-        content[lang].project1Text;
-
-      document.getElementById("project2-text").innerHTML =
-        content[lang].project2Text;
-
-      document.getElementById("contact-title").innerText =
-        content[lang].contactTitle;
-
-      document.getElementById("repo0-link").innerText =
-        content[lang].repo;
-
-      document.getElementById("repo-link").innerText =
-        content[lang].repo;
-
-      document.getElementById("repo2-link").innerText =
-        content[lang].repo;
+    // Scroll fade-in
+    function observeFadeIns() {
+      const els = document.querySelectorAll('.fade-in');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.15 });
+      els.forEach(el => obs.observe(el));
     }
 
     setLang('es');
   </script>
-
 </body>
 </html>
