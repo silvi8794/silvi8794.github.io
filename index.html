@@ -105,6 +105,7 @@
 
     li {
       margin-bottom: 6px;
+      line-height: 1.5;
     }
   </style>
 </head>
@@ -131,24 +132,55 @@
 
     <h2 id="projects-title"></h2>
 
+    <!-- FinCore -->
+    <div class="card">
+      <p><strong>FinCore — Core Bancario y Plataforma Financiera</strong></p>
+      <div id="project0-text"></div>
+      <a
+        href="https://github.com/silvi8794/fincore"
+        target="_blank"
+        id="repo0-link">
+      </a>
+    </div>
+
+    <!-- E-commerce API -->
     <div class="card">
       <p><strong>E-commerce API</strong></p>
       <div id="project1-text"></div>
-      <a href="https://github.com/silvi8794/nestjs-ecommerce-api" target="_blank" id="repo-link"></a>
+      <a
+        href="https://github.com/silvi8794/nestjs-ecommerce-api"
+        target="_blank"
+        id="repo-link">
+      </a>
     </div>
 
+    <!-- Sistema de Gestión -->
     <div class="card">
       <p><strong>Sistema de Gestión de Asistencias (API REST)</strong></p>
       <div id="project2-text"></div>
-      <a href="https://github.com/silvi8794/api-trainning" target="_blank" id="repo2-link"></a>
+      <a
+        href="https://github.com/silvi8794/api-trainning"
+        target="_blank"
+        id="repo2-link">
+      </a>
     </div>
 
     <h2 id="contact-title"></h2>
 
     <div class="contact">
-      <a href="mailto:silvi8794@gmail.com" id="email-link">📧 silvi8794@gmail.com</a>
-      <a href="https://github.com/silvi8794" target="_blank">🐙 GitHub</a>
-      <a href="https://www.linkedin.com/in/silvia-andrea-perez-b2a13120b/" target="_blank">💼 LinkedIn</a>
+      <a href="mailto:silvi8794@gmail.com" id="email-link">
+        📧 silvi8794@gmail.com
+      </a>
+
+      <a href="https://github.com/silvi8794" target="_blank">
+        🐙 GitHub
+      </a>
+
+      <a
+        href="https://www.linkedin.com/in/silvia-andrea-perez-b2a13120b/"
+        target="_blank">
+        💼 LinkedIn
+      </a>
     </div>
 
   </div>
@@ -157,13 +189,71 @@
     const content = {
       es: {
         subtitle: "Backend Developer (NestJS & Laravel)",
+
         aboutTitle: "Sobre mí",
-        aboutText: "Desarrollo APIs backend robustas y escalables utilizando NestJS y Laravel, aplicando principios de Clean Architecture, separación de responsabilidades y buenas prácticas para construir sistemas mantenibles y de alto rendimiento.",
+
+        aboutText:
+          "Desarrollo APIs backend robustas y escalables utilizando NestJS y Laravel, aplicando principios de Clean Architecture, separación de responsabilidades y buenas prácticas para construir sistemas mantenibles y de alto rendimiento.",
+
         stackTitle: "Stack",
-        stackText: "NestJS · Laravel · TypeScript · Node.js · MySQL · WebSockets · JWT · RBAC",
+
+        stackText:
+          "NestJS · Laravel · TypeScript · Node.js · PostgreSQL · MySQL · MongoDB · Redis · Docker · Kubernetes · Prometheus · Grafana · DDD · Clean Architecture · CQRS",
+
         projectsTitle: "Proyectos",
+
+        project0Text: `
+          <p>
+            Core bancario modular y escalable, diseñado bajo principios de
+            Domain-Driven Design (DDD) y Clean Architecture.
+          </p>
+
+          <ul>
+            <li>
+              Arquitectura de microservicios organizada en Bounded Contexts
+              independientes: autenticación, cuentas, pagos e inversiones.
+            </li>
+
+            <li>
+              API Gateway centralizado para la comunicación y orquestación
+              de los servicios.
+            </li>
+
+            <li>
+              Persistencia políglota utilizando PostgreSQL, MongoDB y Redis.
+            </li>
+
+            <li>
+              Implementación de DDD con Aggregate Roots y Value Objects
+              inmutables.
+            </li>
+
+            <li>
+              CQRS aplicado al módulo de inversiones para separar las
+              operaciones de lectura y escritura.
+            </li>
+
+            <li>
+              Auditoría y trazabilidad de eventos mediante MongoDB.
+            </li>
+
+            <li>
+              Observabilidad y monitoreo en tiempo real con Prometheus y Grafana.
+            </li>
+
+            <li>
+              Infraestructura contenerizada con Docker y manifiestos preparados
+              para Kubernetes.
+            </li>
+          </ul>
+        `,
+
         project1Text: `
-          <p>API REST desarrollada con NestJS y TypeScript, diseñada para ser escalable y mantenible.</p>
+          <p>
+            API REST desarrollada con NestJS y TypeScript, diseñada para ser
+            escalable y mantenible.
+          </p>
+
           <ul>
             <li>Arquitectura dirigida por eventos (EDA)</li>
             <li>Comunicación en tiempo real con WebSockets</li>
@@ -171,7 +261,9 @@
             <li>Validación automatizada de pagos usando IA (Google Gemini)</li>
             <li>Optimización de performance mediante estrategias de caching</li>
           </ul>
+
           <p>Además, incluye:</p>
+
           <ul>
             <li>Gestión de catálogos jerárquicos</li>
             <li>Control de stock por variantes</li>
@@ -179,26 +271,109 @@
             <li>Tests automatizados con Jest</li>
           </ul>
         `,
+
         project2Text: `
-          <p>Desarrollo de una API robusta y testeable, construida para soportar reglas de negocio complejas</p>
+          <p>
+            Desarrollo de una API robusta y testeable, construida para
+            soportar reglas de negocio complejas.
+          </p>
+
           <ul>
-            <li>Arquitectura Limpia: Separación de la capa de acceso a datos (Eloquent) de la lógica de negocio mediante interfaces, garantizando el principio de Inversión de Dependencia (SOLID).</li>
-            <li>Alto Rendimiento: Implementación del patrón Decorator para añadir una capa de caché transparente que reduce los accesos a base de datos.</li>
-            <li>Testing y Calidad: Cobertura de código con pruebas unitarias aisladas (TDD), garantizando fiabilidad y previniendo regresiones.</li>
+            <li>
+              <strong>Arquitectura Limpia:</strong>
+              Separación de la capa de acceso a datos (Eloquent) de la lógica
+              de negocio mediante interfaces, garantizando el principio de
+              Inversión de Dependencia (SOLID).
+            </li>
+
+            <li>
+              <strong>Alto Rendimiento:</strong>
+              Implementación del patrón Decorator para añadir una capa de
+              caché transparente que reduce los accesos a base de datos.
+            </li>
+
+            <li>
+              <strong>Testing y Calidad:</strong>
+              Cobertura de código con pruebas unitarias aisladas (TDD),
+              garantizando fiabilidad y previniendo regresiones.
+            </li>
           </ul>
         `,
+
         contactTitle: "Contacto",
+
         repo: "Ver repo →"
       },
+
       en: {
         subtitle: "Backend Developer (NestJS & Laravel)",
+
         aboutTitle: "About me",
-        aboutText: "I build robust and scalable backend APIs using NestJS and Laravel, applying Clean Architecture principles, separation of concerns, and best practices to create maintainable and high-performance systems.",
+
+        aboutText:
+          "I build robust and scalable backend APIs using NestJS and Laravel, applying Clean Architecture principles, separation of concerns, and best practices to create maintainable and high-performance systems.",
+
         stackTitle: "Stack",
-        stackText: "NestJS · Laravel · TypeScript · Node.js · PostgreSQL · WebSockets · JWT · RBAC",
+
+        stackText:
+          "NestJS · Laravel · TypeScript · Node.js · PostgreSQL · MySQL · MongoDB · Redis · Docker · Kubernetes · Prometheus · Grafana · DDD · Clean Architecture · CQRS",
+
         projectsTitle: "Projects",
+
+        project0Text: `
+          <p>
+            Modular and scalable banking core designed following
+            Domain-Driven Design (DDD) and Clean Architecture principles.
+          </p>
+
+          <ul>
+            <li>
+              Microservices architecture organized into independent
+              Bounded Contexts: authentication, accounts, payments,
+              and investments.
+            </li>
+
+            <li>
+              Centralized API Gateway for service communication
+              and orchestration.
+            </li>
+
+            <li>
+              Polyglot persistence using PostgreSQL, MongoDB, and Redis.
+            </li>
+
+            <li>
+              DDD implementation with Aggregate Roots and immutable
+              Value Objects.
+            </li>
+
+            <li>
+              CQRS applied to the investment module to separate
+              read and write operations.
+            </li>
+
+            <li>
+              Event auditing and traceability using MongoDB.
+            </li>
+
+            <li>
+              Real-time observability and monitoring with Prometheus
+              and Grafana.
+            </li>
+
+            <li>
+              Containerized infrastructure using Docker with
+              Kubernetes-ready manifests.
+            </li>
+          </ul>
+        `,
+
         project1Text: `
-          <p>Scalable REST API built with NestJS and TypeScript, designed for maintainability and performance.</p>
+          <p>
+            Scalable REST API built with NestJS and TypeScript,
+            designed for maintainability and performance.
+          </p>
+
           <ul>
             <li>Event-driven architecture (EDA)</li>
             <li>Real-time communication with WebSockets</li>
@@ -206,7 +381,9 @@
             <li>Automated payment validation using AI (Google Gemini)</li>
             <li>Performance optimization using caching strategies</li>
           </ul>
+
           <p>Also includes:</p>
+
           <ul>
             <li>Hierarchical catalog management</li>
             <li>Stock control by variants</li>
@@ -214,32 +391,83 @@
             <li>Automated testing with Jest</li>
           </ul>
         `,
+
         project2Text: `
-  <p>Development of a robust and testable API designed to support complex business rules.</p>
-  <ul>
-    <li>Clean Architecture: Separation between the data access layer (Eloquent) and business logic through interfaces, ensuring compliance with the Dependency Inversion Principle (SOLID).</li>
-    <li>High Performance: Implementation of the Decorator pattern to provide a transparent caching layer, reducing database access and improving response times.</li>
-    <li>Testing & Quality: Code coverage with isolated unit tests (TDD), ensuring reliability and preventing regressions.</li>
-  </ul>
-`,
+          <p>
+            Development of a robust and testable API designed to
+            support complex business rules.
+          </p>
+
+          <ul>
+            <li>
+              <strong>Clean Architecture:</strong>
+              Separation between the data access layer (Eloquent)
+              and business logic through interfaces, ensuring
+              compliance with the Dependency Inversion Principle (SOLID).
+            </li>
+
+            <li>
+              <strong>High Performance:</strong>
+              Implementation of the Decorator pattern to provide
+              a transparent caching layer, reducing database access
+              and improving response times.
+            </li>
+
+            <li>
+              <strong>Testing & Quality:</strong>
+              Code coverage with isolated unit tests (TDD), ensuring
+              reliability and preventing regressions.
+            </li>
+          </ul>
+        `,
+
         contactTitle: "Contact",
+
         repo: "View repo →"
       }
     };
 
     function setLang(lang) {
       document.documentElement.lang = lang;
-      document.getElementById("subtitle").innerText = content[lang].subtitle;
-      document.getElementById("about-title").innerText = content[lang].aboutTitle;
-      document.getElementById("about-text").innerText = content[lang].aboutText;
-      document.getElementById("stack-title").innerText = content[lang].stackTitle;
-      document.getElementById("stack-text").innerText = content[lang].stackText;
-      document.getElementById("projects-title").innerText = content[lang].projectsTitle;
-      document.getElementById("project1-text").innerHTML = content[lang].project1Text;
-      document.getElementById("project2-text").innerHTML = content[lang].project2Text;
-      document.getElementById("contact-title").innerText = content[lang].contactTitle;
-      document.getElementById("repo-link").innerText = content[lang].repo;
-      document.getElementById("repo2-link").innerText = content[lang].repo;
+
+      document.getElementById("subtitle").innerText =
+        content[lang].subtitle;
+
+      document.getElementById("about-title").innerText =
+        content[lang].aboutTitle;
+
+      document.getElementById("about-text").innerText =
+        content[lang].aboutText;
+
+      document.getElementById("stack-title").innerText =
+        content[lang].stackTitle;
+
+      document.getElementById("stack-text").innerText =
+        content[lang].stackText;
+
+      document.getElementById("projects-title").innerText =
+        content[lang].projectsTitle;
+
+      document.getElementById("project0-text").innerHTML =
+        content[lang].project0Text;
+
+      document.getElementById("project1-text").innerHTML =
+        content[lang].project1Text;
+
+      document.getElementById("project2-text").innerHTML =
+        content[lang].project2Text;
+
+      document.getElementById("contact-title").innerText =
+        content[lang].contactTitle;
+
+      document.getElementById("repo0-link").innerText =
+        content[lang].repo;
+
+      document.getElementById("repo-link").innerText =
+        content[lang].repo;
+
+      document.getElementById("repo2-link").innerText =
+        content[lang].repo;
     }
 
     setLang('es');
